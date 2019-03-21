@@ -1,6 +1,6 @@
-package com.mall.dao;
+package com.mmall.dao;
 
-import com.mall.pojo.Shipping;
+import com.mmall.pojo.Shipping;
 
 public interface ShippingMapper {
     int deleteByPrimaryKey(Integer id);

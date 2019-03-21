@@ -203,8 +203,6 @@
             <artifactId>jsqlparser</artifactId>
             <version>0.9.4</version>
         </dependency>
-
-
         <!-- alipay -->
         <dependency>
             <groupId>commons-codec</groupId>

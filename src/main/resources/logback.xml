@@ -10,7 +10,7 @@
         </filter>
     </appender>
 
-    <appender name="mall" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="mmall" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>d:/malllog/mall.log</File>
         <!--<File>/developer/apache-tomcat-7.0.73/logs/mall.log</File>-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -43,8 +43,8 @@
         </filter>
     </appender>
 
-    <logger name="com.mall" additivity="false" level="INFO" >
-        <appender-ref ref="mall" />
+    <logger name="com.mmall" additivity="false" level="INFO" >
+        <appender-ref ref="mmall" />
         <appender-ref ref="console"/>
     </logger>
 
@@ -52,7 +52,7 @@
 
     <!-- geelynote mybatis log 日志 -->
 
-    <logger name="com.mall.dao" level="DEBUG"/>
+    <logger name="com.mmall.dao" level="DEBUG"/>
 
     <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >-->
         <!--<appender-ref ref="console"/>-->
