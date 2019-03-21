@@ -25,6 +25,7 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("用户名不存在");
         }
         String md5Password = MD5Util.MD5EncodeUtf8(password);
+        System.out.println("login:"+md5Password);
         User user = userMapper.selectLogin(username, md5Password);
         if (user == null) {
             return ServerResponse.createByErrorMessage("密码错误");
@@ -93,12 +94,13 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByErrorMessage("答案不正确");
     }
 
-    public ServerResponse<String> forgetResetPassword(String username, String newPasssword, String forgetToken) {
+    public ServerResponse<String> forgetResetPassword(String username, String newPassword, String forgetToken) {
+        System.out.println("new:"+newPassword);
         if (StringUtils.isBlank(forgetToken)) {
             return ServerResponse.createByErrorMessage("参数错误，需要传递token");
         }
         ServerResponse valid = checkValid(username, Const.USERNAME);
-        if (!valid.isSuccess()) {
+        if (valid.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX + username);
@@ -106,7 +108,8 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("token无效或过期");
         }
         if (StringUtils.equals(forgetToken, token)) {
-            String md5Password = MD5Util.MD5EncodeUtf8(newPasssword);
+            String md5Password = MD5Util.MD5EncodeUtf8(newPassword);
+            System.out.println("md5:"+md5Password);
             int row = userMapper.updatePasswordByUsername(username, md5Password);
             if (row > 0) {
                 return ServerResponse.createBySuccessMessage("密码修改成功");
@@ -160,5 +163,13 @@ public class UserServiceImpl implements IUserService {
         }
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess(user);
+    }
+
+    //backend
+    public ServerResponse checkAdminRole(User user) {
+        if (user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN) {
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
     }
 }
