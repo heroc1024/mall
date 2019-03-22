@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Set;
 
 @Service("iCategoryService")
-public class ICategoryServiceImpl implements ICategoryService {
-    private Logger         logger = LoggerFactory.getLogger(ICategoryServiceImpl.class);
+public class CategoryServiceImpl implements ICategoryService {
+    private Logger         logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
     @Autowired
     private CategoryMapper categoryMapper;
 
@@ -60,7 +60,7 @@ public class ICategoryServiceImpl implements ICategoryService {
         return ServerResponse.createBySuccess(categoryList);
     }
 
-    public ServerResponse selectCategoryAndChildrenById(Integer categoryId) {
+    public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId) {
         Set<Category> categorySet = Sets.newHashSet();
         findeChildCategory(categorySet, categoryId);
         List<Integer> categoryList = Lists.newArrayList();

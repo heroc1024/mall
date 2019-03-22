@@ -25,7 +25,7 @@ public class CateoryManageController {
     @Autowired
     private ICategoryService iCategoryService;
 
-    @RequestMapping(value = "/add_category.do")
+    @RequestMapping(value = "/add_category.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse addCategory(String categoryName, @RequestParam(value = "parentId", defaultValue = "0") Integer parentId, HttpSession session) {
 
@@ -42,7 +42,7 @@ public class CateoryManageController {
         }
     }
 
-    @RequestMapping("/set_category_name.do")
+    @RequestMapping(value = "/set_category_name.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse setCategoryName(String categoryName, Integer categoryId, HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
@@ -59,7 +59,7 @@ public class CateoryManageController {
     }
 
 
-    @RequestMapping(value = "/get_category.do",method = RequestMethod.GET)
+    @RequestMapping(value = "/get_category.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<List<Category>> getChildrenparallelCategory(@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId, HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
@@ -75,9 +75,9 @@ public class CateoryManageController {
         }
     }
 
-    @RequestMapping("/get_deep_category.do")
+    @RequestMapping(value = "/get_deep_category.do", method = RequestMethod.GET)
     @ResponseBody
-    public ServerResponse<List<Category>> getCategoryAndDeepChildrenCategory(@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId, HttpSession session) {
+    public ServerResponse<List<Integer>> getCategoryAndDeepChildrenCategory(@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId, HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录");
