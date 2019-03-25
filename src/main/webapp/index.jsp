@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2>Home Page</h2>
 </body>
 SpringMVC文件上传测试
 <form name="form1" action="/manage/product/upload.do" method="post" enctype="multipart/form-data">
